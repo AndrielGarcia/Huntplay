@@ -1,0 +1,46 @@
+Recurso - Conceito: A informção logo após a barra da rota
+Rota - Conceito: Seria a URL completa
+
+Métodos HTTP:
+
+GET: Buscar/Listar uma informação do Back-end
+POST: Criar uma informação no Back-end
+PUT: Alterar uma informação no Back-end
+DELETE: Deletar uma informação no Back-end
+
+Tipos de parâmetros:
+Query: Parâmetros nomeados enviados na rota após o "?" (Filtros, paginação)
+Route Params: Parâmetros utilizados para identificar recursos. Ex: /users:id
+Request Body:Corpo da requisição, utilizado para criar ou alterar recursos
+
+Bancos de dados
+SQL: MySQL, SQLite, PostgreSQL, Oracle, Microsoft SQL Server
+NoSQL: MongoDB, CouchDB, etc
+
+Configuração Banco de dados
+Driver: SELECT * FROM users
+Query Builder: table('users').select('*').where() LIXOOO
+
+Entidades projeto BE hero
+
+Entidades
+- ONG
+- Caso (Incident)
+
+Funcionalidades
+- Login de ONG
+- Logout de ONG
+- Cadastro de ONG
+- Cadastrar novos casos
+- Deletar casos
+- Listar casos específicos de uma ONG
+- Listar todos os casos
+- Entrar em contato com a ONG
+
+Comandos Knex
+- Criar uma Migration: npx knex migrate:make NOMEDAMIGRATION
+- Executar as migrations: npx knex migrate:latest
+- Desfaz a última vez que executou o comando latest: npx knex migrate:rollback
+- Mostrar Migrations executadas: npx knex migrate:status
+
+

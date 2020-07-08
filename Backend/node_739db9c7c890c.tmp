@@ -1,0 +1,12 @@
+const express = require('express')
+
+const app = express()
+
+app.get('/', function(request, response) {
+    return response.json({
+        evento: 'HuntPlay',
+        desenvolvedor: 'Andriel Garcia Silva'
+    })
+})
+
+app.listen(3333)

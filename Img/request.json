@@ -1,0 +1,15 @@
+{
+    "requests": [
+      {
+        "image": {
+          "content": "base64-encoded-image"
+        },
+        "features": [
+          {
+            "type": "TEXT_DETECTION"
+          }
+        ]
+      }
+    ]
+  }
+  
