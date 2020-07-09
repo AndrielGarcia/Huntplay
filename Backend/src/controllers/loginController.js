@@ -6,10 +6,10 @@ const authConfig = require('../auth.json')
 module.exports = {
 
     async index(request, response) {
-        const { user_id, senha } = request.body
+        const { id_user, senha } = request.body
 
-        const user = await connection('users').select('*').where('id_user', user_id).orWhere('email', user_id)
-
+        const user = await connection('users').select('*').where('id_user', id_user).orWhere('email', id_user)
+        console.log(user)
         if (user.length < 1) {
             return response.status(401).send({ mensagem: 'Falha na Autenticação1' })
         }
