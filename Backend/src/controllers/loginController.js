@@ -9,7 +9,7 @@ module.exports = {
         const { id_user, senha } = request.body
 
         const user = await connection('users').select('*').where('id_user', id_user).orWhere('email', id_user)
-        console.log(user)
+    
         if (user.length < 1) {
             return response.status(401).send({ mensagem: 'Falha na Autenticação1' })
         }

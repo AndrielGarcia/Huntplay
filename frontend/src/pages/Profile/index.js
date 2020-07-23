@@ -6,35 +6,34 @@ import api from '../../services/api'
 import './styles.css'
 
 export default function Login() {
-    const [perfil, setPerfil] = useState([])
+    const [matches, setMatches] = useState([])
+    //const { user, matches } = perfil
 
     const jwt = require('jsonwebtoken')
     const authConfig = require('../../auth.json')
 
     const decoded = jwt.verify(localStorage.getItem('jwt'), authConfig.secret)
     console.log(decoded.id_user)
+
     useEffect(() => {
         api.get('profile', {
             headers: {
                 Authorization: decoded.id_user,
             }
         }).then(response => {
-            setPerfil(response.data)
+            setMatches(response.data)
         })
     }, [decoded.id_user])
 
-    console.log(perfil)
+    
 
     return(
         <div>
-            <div>
-                <h1>{perfil.user}</h1>
-            </div>
 
             <div>
                 <ul>
-                    {perfil.matches.map(match => (
-                        <li key={match.cod_partida}>
+                    {matches.map(match => ( 
+                            <li key={match.cod_partida}>
 
                             <strong>Partida:</strong>
                             <p>{match.nome_partida}</p>
@@ -51,7 +50,8 @@ export default function Login() {
                             <strong>Modo:</strong>
                             <p>{match.modo}</p>
                             
-                        </li>
+                            </li>
+                        
                     ))}
                 </ul>
             </div>

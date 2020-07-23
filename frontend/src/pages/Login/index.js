@@ -72,6 +72,7 @@ export default function Login() {
                     </Link>
                 </form>
             </section>
+    
 
             <img src={imgAndriel} alt="Imagem Aleatória"/>
         </div>
