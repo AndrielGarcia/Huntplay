@@ -1,6 +1,5 @@
 import React, { useState, useEffect} from 'react'
 //import { Link } from 'react-router-dom'
-import io from 'socket.io-client'
 
 import api from '../../services/api'
 
@@ -10,16 +9,11 @@ export default function Login() {
     const [matches, setMatches] = useState([])
     //const { user, matches } = perfil
 
-    const [conexao, setConexao] = useState('')
-
-    const socket = io('http://localhost:3333')
-    socket.on('connect', () => setConexao('Você está conectado'))
-
     const jwt = require('jsonwebtoken')
     const authConfig = require('../../auth.json')
 
     const decoded = jwt.verify(localStorage.getItem('jwt'), authConfig.secret)
-    console.log(decoded.id_user) 
+    console.log(decoded.id_user)
 
     useEffect(() => {
         api.get('profile', {
@@ -37,7 +31,6 @@ export default function Login() {
         <div>
 
             <div>
-                <h1>{conexao}</h1>
                 <ul>
                     {matches.map(match => ( 
                             <li key={match.cod_partida}>

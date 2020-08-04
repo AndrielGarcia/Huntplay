@@ -9,10 +9,10 @@ const matchController = require('./controllers/matchController')
 const mod_gameController = require('./controllers/mod_gameController')
 const profileController = require('./controllers/profileController')
 const loginController = require('./controllers/loginController')
+const match_messagesController = require('./controllers/match_messagesController')
 
 
 const routes = express.Router()
-// routes.use(authMiddleware)
 
 routes.get('/countries', countryController.index)
 routes.post('/countries', countryController.create)
@@ -39,6 +39,9 @@ routes.get('/profile', profileController.index)
 routes.get('/mods_games', mod_gameController.index)
 routes.post('/mods_games', mod_gameController.create)
 routes.delete('/mods_games/:id', mod_gameController.delete)
+
+routes.get('/match_messages/:cod_partida', match_messagesController.index)
+routes.post('/match_messages', match_messagesController.create)
 
 routes.post('/login', loginController.index)
 
