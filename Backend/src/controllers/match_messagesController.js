@@ -5,7 +5,10 @@ module.exports = {
     async index(request, response) {
         const { cod_partida } = request.params
         console.log(cod_partida)
-        const messages = await connection('match_messages').select('*').where('cod_partida', cod_partida)
+        const messages = await connection('match_messages')
+        .select('*')
+        .where('cod_partida', cod_partida)
+        .orderBy('id')
         
         return response.json(messages)
     },
@@ -15,16 +18,23 @@ module.exports = {
         
         const status = 1
 
-        await connection('match_messages').insert({
+        const [id] = await connection('match_messages').insert({
 
             cod_partida,
             autor,
             desc_message,
             status,
 
-        })
+        }).returning('id')
 
-        return response.json({ desc_message })
+        return response.json({ id, cod_partida, autor, desc_message, status })
     },
+
+    async delete(request, response) {
+        const { cod_partida } = request.params
+
+        await connection('match_messages').where('cod_partida', cod_partida).del()
+        return response.status(204).send()
+    }
 
 }

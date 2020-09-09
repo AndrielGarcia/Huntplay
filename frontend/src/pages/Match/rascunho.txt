@@ -12,12 +12,14 @@ export default function Match(props) {
 
     const cod_partida = props.match.params.cod_partida
 
-    const socket = io('http://localhost:3666')
-   
+    const socket = io('http://localhost:3333')
+    socket.on('connect', () => setConexao('Você está conectado'))
+
     const jwt = require('jsonwebtoken')
     const authConfig = require('../../auth.json')
 
     const decoded = jwt.verify(localStorage.getItem('jwt'), authConfig.secret)
+    console.log(decoded.id_user) 
 
     const [message, setMessage] = useState('')
     const [messages, setMessages] = useState([])
@@ -29,35 +31,40 @@ export default function Match(props) {
     }, [cod_partida])
 
     useEffect(() => {
-        socket.on('receive.message', data => {
-            setMessages([...messages, data])
-        })
-        return () => socket.off('receive.message')
-    }, [messages])
-   
+        const handleNewMessage = newMessage =>
+            console.log(newMessage)
+        socket.on('chat.message', handleNewMessage)
+        return () => socket.off('chat.message', handleNewMessage)
+    }, [1000])
 
-    async function handleFormSubmit(e) {
-        e.preventDefault()
+    const handleFormSubmit = event => {
+        event.preventDefault()
         if (message.trim()) {
-            const data = {
+            socket.emit('chat.message', {
                 cod_partida: cod_partida,
                 autor: decoded.id_user,
                 desc_message: message,
-            }
-            socket.emit('send.message', data)
-            const response = await api.post('/match_messages', data)
-            //setMessages([...messages, response.data])
-
+            })
+            setMessages([...messages, ])
             setMessage('')
+            console.log(messages)
         }
     }
+    
+    useEffect(() => {
+        api.get(`/match_messages/${cod_partida}`).then(response => {
+            setMessages(response.data)
+        })
+    }, [cod_partida])
+
+    console.log(messages)
 
     return(
         <main className="container">
             <h1>{conexao}</h1>
             <ul className="list">
             {messages.map(message => ( 
-        
+                
                 <li className={`list__item--${message.autor === decoded.id_user ? 'mine' : 'other'}`}
                 key={message.id} 
                 >

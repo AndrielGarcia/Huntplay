@@ -11,16 +11,17 @@ const io = socket(server)
 
 io.on('connection', (socket) => {
     console.log('new connection', socket.id)
-    socket.on('chat.message', (data) => {
+    socket.on('send.message', data => {
         console.log('mensagem recebida', data)
+        io.emit('receive.message', data)
     })
-    socket.on('disconnect', () => {
-        console.log('desconnction')
-    })
+    //socket.on('disconnect', () => {
+        //console.log('desconnction')
+    //})
 })
 app.use(cors())
 app.use(express.json())
 app.use(routes)
+app.listen(3333)
 
-
-server.listen(3333)
+server.listen(3666)

@@ -42,6 +42,7 @@ routes.delete('/mods_games/:id', mod_gameController.delete)
 
 routes.get('/match_messages/:cod_partida', match_messagesController.index)
 routes.post('/match_messages', match_messagesController.create)
+routes.delete('/match_messages/:cod_partida', match_messagesController.delete)
 
 routes.post('/login', loginController.index)
 

@@ -5,7 +5,7 @@ exports.up = function(knex) {
         table.string('cod_partida').notNullable()
         table.string('autor').notNullable()
         table.string('desc_message').notNullable()
-        table.integer('status'). notNullable()
+        table.integer('status').notNullable()
         table.timestamps(true, true)
 
         table.foreign('cod_partida').references('cod_partida').inTable('matches').onDelete('CASCADE')
